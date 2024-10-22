@@ -1,46 +1,32 @@
 <template>
  <div class="voice-input">
-    <button class="action-btn" @click="startListening" :disabled="isListening">
+    <v-btn color="deep-purple-accent-3" variant="tonal" class="action-btn" @click="startListening" :disabled="isListening">
       Start Voice Input
-    </button>
-    <button class="action-btn" @click="stopListening" :disabled="!isListening">
+    </v-btn>
+    <v-btn color="" class="action-btn ml-5" @click="stopListening" :disabled="!isListening">
       Stop
-    </button>
+    </v-btn>
     <p class="transcript">{{ transcript }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useVoiceStore } from '@/stores/voiceStore';
+import { useVoiceStore } from "@/stores/voiceStore";
 
 
-   const { startListening, stopListening, isListening, transcript } = useVoiceStore();
+  const { startListening, stopListening, isListening, transcript } = useVoiceStore();
 
 </script>
 
 <style scoped>
 .voice-input {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: #fff;
   text-align: center;
 }
 
-.action-btn {
-  background-color: #9b59b6;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin: 10px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
 
 .action-btn:hover {
   background-color: #8e44ad;
