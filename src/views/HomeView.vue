@@ -1,9 +1,23 @@
+<template>
+   <div class="app-container">
+    <VoiceInput />
+    <TextDisplay />
+  </div>
+</template>
+
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import VoiceInput from '@/components/VoiceInput.vue';
+import TextDisplay from '@/components/TextDisplay.vue';
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+}
+</style>
