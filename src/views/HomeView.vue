@@ -1,7 +1,9 @@
 <template>
    <div class="app-container">
     <VoiceInput />
-    <TextDisplay />
+    <section class="mt-10">
+      <TextDisplay />
+    </section>
   </div>
 </template>
 
@@ -16,7 +18,6 @@ import TextDisplay from '@/components/TextDisplay.vue';
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #fdfdfd;
+  margin-top: 200px;
 }
 </style>

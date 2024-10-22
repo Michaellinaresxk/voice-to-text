@@ -7,6 +7,8 @@ interface SpeechRecognition extends EventTarget {
   start: () => void
   stop: () => void
   onresult: (event: SpeechRecognitionEvent) => void
+  onerror: (event: Event) => void
+  onstart: () => void
 }
 
 interface SpeechRecognitionEvent extends Event {
@@ -28,9 +30,19 @@ export function useSpeechRecognition() {
       recognition.interimResults = false
       recognition.lang = 'en-US'
 
+      // Event handlers
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const result = event.results[event.results.length - 1][0].transcript
         transcript.value += result
+        console.log('Updated transcript:', transcript.value) // Check if this updates
+      }
+
+      recognition.onstart = () => {
+        console.log('Speech recognition started')
+      }
+
+      recognition.onerror = event => {
+        console.error('Speech recognition error:', event)
       }
     } else {
       console.error('Web Speech API is not supported')
@@ -41,6 +53,7 @@ export function useSpeechRecognition() {
     if (recognition) {
       recognition.start()
       isListening.value = true
+      console.log('Started listening')
     }
   }
 
@@ -48,6 +61,7 @@ export function useSpeechRecognition() {
     if (recognition) {
       recognition.stop()
       isListening.value = false
+      console.log('Stopped listening')
     }
   }
 

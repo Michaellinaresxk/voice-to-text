@@ -1,31 +1,31 @@
 <template>
    <div class="text-display">
-    <h3 color="">Transcribed Text:</h3>
-    <p color="" class="transcript">{{ transcript }}</p>
+    <h3 class="title">Transcribed Text:</h3>
+    <p class="transcript mt-8">{{ transcript }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVoiceStore } from '@/stores/voiceStore';
-
+import { watchEffect } from 'vue';
 const { transcript } = useVoiceStore();
+
+
+// Watch for changes in the transcript and ensure reactivity
+watchEffect(() => {
+  console.log('Transcript updated:', transcript); // Ensure the transcript is updated
+});
 </script>
 
 <style scoped>
-.text-display {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
+.title {
+  color: #616161;
+}
 .transcript {
-  padding: 15px;
-  border-radius: 10px;
+  color: #616161;
   margin-top: 10px;
-  font-size: 16px;
-  max-width: 80%;
+  font-size: 22px;
   word-wrap: break-word;
-  text-align: left;
 }
 </style>
