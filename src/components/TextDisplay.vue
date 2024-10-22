@@ -1,7 +1,7 @@
 <template>
    <div class="text-display">
-    <h3>Transcribed Text:</h3>
-    <p class="transcript">{{ transcript }}</p>
+    <h3 color="">Transcribed Text:</h3>
+    <p color="" class="transcript">{{ transcript }}</p>
   </div>
 </template>
 
@@ -17,12 +17,9 @@ const { transcript } = useVoiceStore();
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  color: white;
 }
 
 .transcript {
-  background-color: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 10px;
   margin-top: 10px;
