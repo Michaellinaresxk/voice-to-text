@@ -11,10 +11,14 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import '@mdi/font/css/materialdesignicons.css';
 
 const vuetify = createVuetify({
   components,
   directives,
+  icons: {
+    iconfont: 'mdi', // Use 'mdi' if you're using Material Design Icons
+  },
 })
 
 const app = createApp(App)

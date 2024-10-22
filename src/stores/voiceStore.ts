@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useSpeechRecognition } from '../composables/useSpeechRecognition'
+import { useSpeechRecognition } from '@/composables/useSpeechRecognition'
 
 export const useVoiceStore = defineStore('voiceStore', () => {
   const { transcript, isListening, startListening, stopListening } =
