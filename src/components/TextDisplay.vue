@@ -1,19 +1,22 @@
 <template>
    <div class="text-display">
     <h3 class="title">Transcribed Text:</h3>
-    <p class="transcript mt-8">{{ transcript }}</p>
+    <v-container class="">
+
+      <p class="transcript mt-8">{{ transcript }}</p>
+    </v-container>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVoiceStore } from '@/stores/voiceStore';
-import { watchEffect } from 'vue';
+import { watchEffect, ref } from 'vue';
 const { transcript } = useVoiceStore();
 
+const transcriptedText = ref(transcript);
 
-// Watch for changes in the transcript and ensure reactivity
 watchEffect(() => {
-  console.log('Transcript updated:', transcript); // Ensure the transcript is updated
+  console.log('Transcript updated:', transcriptedText.value); // Ensure the transcript is updated
 });
 </script>
 

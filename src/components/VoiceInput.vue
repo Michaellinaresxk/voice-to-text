@@ -21,16 +21,13 @@
     >
       Stop
     </v-btn>
-
-    <!-- Display the transcript dynamically -->
-    <p class="transcript">{{ transcript }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVoiceStore } from '@/stores/voiceStore';
 
-const { startListening, stopListening, isListening, transcript } = useVoiceStore();
+const { startListening, stopListening, isListening } = useVoiceStore();
 </script>
 
 <style scoped>
