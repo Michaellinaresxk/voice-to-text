@@ -20,35 +20,52 @@ export function useSpeechRecognition() {
   const isListening = ref<boolean>(false)
   let recognition: SpeechRecognition | null = null
 
-  const initRecognition = () => {
+  // Initialize SpeechRecognition object
+  const createRecognition = (): SpeechRecognition | null => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition =
         (window as any).SpeechRecognition ||
         (window as any).webkitSpeechRecognition
-      recognition = new SpeechRecognition()
+      return new SpeechRecognition()
+    } else {
+      console.error('Web Speech API is not supported')
+      return null
+    }
+  }
+
+  // Handle result event
+  const handleResult = (event: SpeechRecognitionEvent) => {
+    const result = event.results[event.results.length - 1][0].transcript
+    transcript.value = result // Update the transcript
+    console.log('Updated transcript:', transcript.value)
+  }
+
+  // Handle start event
+  const handleStart = () => {
+    console.log('Speech recognition started')
+  }
+
+  // Handle error event
+  const handleError = (event: Event) => {
+    console.error('Speech recognition error:', event)
+  }
+
+  // Initialize recognition and assign event handlers
+  const initRecognition = () => {
+    recognition = createRecognition()
+    if (recognition) {
       recognition.continuous = true
       recognition.interimResults = false
       recognition.lang = 'en-US'
 
-      // Event handlers
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
-        const result = event.results[event.results.length - 1][0].transcript
-        transcript.value += result
-        console.log('Updated transcript:', transcript.value) // Check if this updates
-      }
-
-      recognition.onstart = () => {
-        console.log('Speech recognition started')
-      }
-
-      recognition.onerror = event => {
-        console.error('Speech recognition error:', event)
-      }
-    } else {
-      console.error('Web Speech API is not supported')
+      // Assign event handlers
+      recognition.onresult = handleResult
+      recognition.onstart = handleStart
+      recognition.onerror = handleError
     }
   }
 
+  // Start listening
   const startListening = () => {
     if (recognition) {
       recognition.start()
@@ -57,6 +74,7 @@ export function useSpeechRecognition() {
     }
   }
 
+  // Stop listening
   const stopListening = () => {
     if (recognition) {
       recognition.stop()
@@ -65,6 +83,7 @@ export function useSpeechRecognition() {
     }
   }
 
+  // Setup lifecycle hooks
   onMounted(() => {
     initRecognition()
   })
